@@ -6,3 +6,4 @@ pub mod vote;
 pub mod stream_results;
 pub mod list_polls;
 pub mod edit_poll;
+pub mod health;
