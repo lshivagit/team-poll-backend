@@ -13,6 +13,8 @@ use crate::handlers::{
     stream_results::stream_results,
     list_polls::list_polls,
     edit_poll::edit_poll,
+    health::ping,
+
 };
 use crate::middleware::auth::auth_middleware;
 
@@ -20,7 +22,9 @@ pub fn poll_routes() -> Router<MySqlPool> {
     
     let public_routes = Router::new()
         .route("/register", post(register))
-        .route("/login", post(login));
+        .route("/login", post(login))
+        .route("/ping", get(ping));
+
 
     let protected_routes = Router::new()
         .route("/teams", post(create_team).get(list_teams))

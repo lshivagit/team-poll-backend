@@ -6,7 +6,8 @@ pub async fn connect_db() -> Result<MySqlPool, sqlx::Error> {
         .expect("DATABASE_URL environment variable must be set");
 
     MySqlPoolOptions::new()
-        .max_connections(5)
+        .max_connections(10)
+        .min_connections(1)
         .connect(&database_url)
         .await
 }

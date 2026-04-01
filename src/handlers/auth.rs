@@ -41,6 +41,7 @@ pub async fn register(
 ) -> Result<Json<AuthResponse>, (StatusCode, Json<ErrorResponse>)> {
     
     // Hash password
+
     let password_hash = hash(&payload.password, DEFAULT_COST).map_err(|_| {
         (
             StatusCode::INTERNAL_SERVER_ERROR,
@@ -51,6 +52,7 @@ pub async fn register(
     let user_id = Uuid::new_v4().to_string();
 
     // Insert user
+
     let res = sqlx::query(
         "INSERT INTO users (id, email, password_hash) VALUES (?, ?, ?)"
     )
@@ -109,6 +111,7 @@ pub async fn login(
     };
 
     // Verify password
+
     let is_valid = verify(&payload.password, &user.1).unwrap_or(false);
     
     if !is_valid {
